@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import com.google.accompanist.systemuicontroller.SystemUiController
 
 private val DarkColorScheme = darkColorScheme(
     surface = Blue,
@@ -28,17 +29,18 @@ private val LightColorScheme = lightColorScheme(
 
 @Composable
 fun AppBaseTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    isDarkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
+    systemUiController: SystemUiController,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+            if (isDarkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
-        darkTheme -> DarkColorScheme
+        isDarkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
     val view = LocalView.current
@@ -52,10 +54,16 @@ fun AppBaseTheme(
             currentWindow.statusBarColor = colorScheme.primary.toArgb()
             /* accessing the insets controller to change appearance of the status bar, with 100% less deprecation warnings */
             WindowCompat.getInsetsController(currentWindow, view).isAppearanceLightStatusBars =
-                darkTheme
+                isDarkTheme
         }
     }
-
+    SideEffect {
+        if (isDarkTheme) {
+            systemUiController.setStatusBarColor(color = DarkSurface)
+        } else {
+            systemUiController.setStatusBarColor(color = Surface)
+        }
+    }
     MaterialTheme(
         colorScheme = colorScheme,
         content = content

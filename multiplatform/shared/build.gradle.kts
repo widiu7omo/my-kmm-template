@@ -35,6 +35,10 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+                implementation("io.ktor:ktor-client-mock:2.2.2")
+                implementation("com.goncalossilva:resources:0.2.4")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+                implementation("com.russhwolf:multiplatform-settings-test:1.0.0")
             }
         }
         val androidMain by getting {

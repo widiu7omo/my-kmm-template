@@ -33,7 +33,7 @@ suspend fun <T : Any> safeApiCall(apiCall: suspend () -> T?): NetworkResult<T?> 
             errorMessage = networkError.statusMessage ?: e.message
         )
     } catch (e: Exception) {
-        println(e)
+        println(e.message)
         NetworkResult.Error(
             errorCode = 0,
             errorMessage = e.message ?: "An unknown error occurred"

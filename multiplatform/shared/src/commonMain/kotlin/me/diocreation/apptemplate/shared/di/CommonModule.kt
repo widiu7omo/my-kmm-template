@@ -10,10 +10,13 @@ import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
 import me.diocreation.apptemplate.shared.data.cache.multiplatform_settings.PreferencesManager
 import me.diocreation.apptemplate.shared.data.data_sources.local.repositories.SettingsRepositoryLocalImpl
+import me.diocreation.apptemplate.shared.data.data_sources.network.repositories.LandmarksRepositoryNetworkImp
 import me.diocreation.apptemplate.shared.data.data_sources.network.service.ApiService
+import me.diocreation.apptemplate.shared.domain.repositories.LandmarksRepository
 import me.diocreation.apptemplate.shared.domain.repositories.SettingsRepository
 import me.diocreation.apptemplate.shared.domain.utils.Constants.BASE_URL
 import me.diocreation.apptemplate.shared.domain.utils.Constants.BASE_URL_SECURE
+import me.diocreation.apptemplate.shared.presentation.presenters.SharedLandmarkPresenter
 import me.diocreation.apptemplate.shared.presentation.presenters.SharedMainPresenter
 import me.diocreation.apptemplate.shared.presentation.presenters.SharedSettingsPresenter
 import me.diocreation.apptemplate.shared.utils.getAppLanguage
@@ -63,7 +66,9 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
         ApiService(httpClient = get())
     }
     single<SettingsRepository> { SettingsRepositoryLocalImpl(preferencesManager = get()) }
+    single<LandmarksRepository> { LandmarksRepositoryNetworkImp(apiService = get()) }
     single { SharedSettingsPresenter(settingsRepository = get()) }
+    single { SharedLandmarkPresenter(landmarkRepository = get()) }
     single { SharedMainPresenter(settingsRepository = get()) }
 
 }

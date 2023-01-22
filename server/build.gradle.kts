@@ -6,6 +6,7 @@ plugins {
     kotlin("jvm") version "1.8.0"
     id("io.ktor.plugin") version "2.2.2"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.0"
+    application
 }
 
 group = "apptemplate"

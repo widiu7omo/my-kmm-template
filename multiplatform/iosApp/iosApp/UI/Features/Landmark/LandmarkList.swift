@@ -17,18 +17,16 @@ struct LandmarkList: View {
         }
     }
     var body: some View {
-        NavigationView{
-            List{
-                Toggle(isOn: $showFavoriteOnly){
-                    Text("Favorite Only")
+        List{
+            Toggle(isOn: $showFavoriteOnly){
+                Text("Favorite Only")
+            }
+            ForEach(filteredLandmarks){landmark in
+                NavigationLink{
+                    LandmarkDetail(landmark: landmark)
+                } label: {
+                    LandmarkRow(landmark:landmark)
                 }
-                ForEach(filteredLandmarks){landmark in
-                    NavigationLink{
-                        LandmarkDetail(landmark: landmark)
-                    } label: {
-                        LandmarkRow(landmark:landmark)
-                    }
-                }.navigationTitle("Landmarks")
             }
         }
     }
@@ -36,6 +34,6 @@ struct LandmarkList: View {
 
 struct LandmarkList_Previews: PreviewProvider {
     static var previews: some View {
-        LandmarkList()
+        LandmarkList().environmentObject(ModelData())
     }
 }

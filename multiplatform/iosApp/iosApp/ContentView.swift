@@ -2,7 +2,6 @@ import SwiftUI
 import shared
 
 struct ContentView: View {
-	let greet = Greeting().greet()
     @State var currentDestination:Array<Int> = []
     @State var isLinkActive = false
 	var body: some View {

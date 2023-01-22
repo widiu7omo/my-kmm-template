@@ -11,6 +11,9 @@ import SwiftUI
 struct LandmarkList: View {
     @EnvironmentObject var modelData:ModelData
     @State private var showFavoriteOnly = true
+    
+    @StateObject var viewModel = LandmarkListViewModel()
+    
     var filteredLandmarks: [Landmark]{
         modelData.landmarks.filter{ landmark in
             (!showFavoriteOnly || landmark.isFavorite)
@@ -27,6 +30,19 @@ struct LandmarkList: View {
                 } label: {
                     LandmarkRow(landmark:landmark)
                 }
+            }
+            VStack (alignment: .leading){
+                Text("Landmarks").bold().font(.title3)
+                ScrollView(.horizontal){
+                    LazyHStack{
+                        ForEach(viewModel.landmarksData,id: \.id ){ landmark in
+                            Text(landmark.name)
+                        }
+                        
+                    }
+                    
+                }
+                Text(viewModel.errorMessages ?? "Undescribe error message")
             }
         }
     }

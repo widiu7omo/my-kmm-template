@@ -1,5 +1,6 @@
 package me.diocreation.apptemplate.shared.di
 
+import me.diocreation.apptemplate.shared.presentation.presenters.SharedLandmarkPresenter
 import me.diocreation.apptemplate.shared.presentation.presenters.SharedMainPresenter
 import me.diocreation.apptemplate.shared.presentation.presenters.SharedSettingsPresenter
 import org.koin.core.Koin
@@ -15,5 +16,6 @@ fun initKoin(enableNetworkLogs: Boolean = false, appDeclaration: KoinAppDeclarat
 
 fun KoinApplication.Companion.start(): KoinApplication = initKoin { }
 
-//TODO: STILL QUESTIONING ABOUT THIS. WHERE IS CALLER
+//TODO: Used by ios KoinApplication
 val Koin.settingsPresenter: SharedSettingsPresenter get() = get()
+val Koin.landmarkPresenter: SharedLandmarkPresenter get() = get()

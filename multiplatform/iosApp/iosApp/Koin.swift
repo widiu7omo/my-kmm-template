@@ -20,10 +20,12 @@ extension KoinApplication{
         return shared
     }
 }
-
+//TODO: INJECT YOUR PRESENTER HERE
 extension KoinApplication{
     private static let keyPaths: [PartialKeyPath<Koin>] = [
-        \.settingsPresenter
+        \.settingsPresenter,
+        \.landmarkPresenter
+        
     ]
     
     static func inject<T>() -> T{

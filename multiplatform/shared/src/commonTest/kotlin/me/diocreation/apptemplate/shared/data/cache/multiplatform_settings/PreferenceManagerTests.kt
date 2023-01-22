@@ -1,5 +1,6 @@
 package me.diocreation.apptemplate.shared.data.cache.multiplatform_settings
 
+import com.russhwolf.settings.ExperimentalSettingsApi
 import com.russhwolf.settings.MapSettings
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
@@ -15,6 +16,7 @@ class PreferenceManagerTests {
     private val preferencesManager: PreferencesManager =
         PreferencesManager(observableSettings = observableSettingsMock)
 
+    @OptIn(ExperimentalSettingsApi::class)
     @Test
     fun `set int save correct value`() = runTest {
         preferencesManager.setInt(key = "test", value = 1)
@@ -24,6 +26,7 @@ class PreferenceManagerTests {
         assertEquals(actual = result, expected = 1)
     }
 
+    @OptIn(ExperimentalSettingsApi::class)
     @Test
     fun `set int save correct multiple times`() = runTest {
         (0..10).forEachIndexed { index, i ->
@@ -34,6 +37,7 @@ class PreferenceManagerTests {
         }
     }
 
+    @OptIn(ExperimentalSettingsApi::class)
     @Test
     fun `clear preference clears cache`() = runTest {
         preferencesManager.setInt(key = "test", value = 1)
@@ -45,6 +49,7 @@ class PreferenceManagerTests {
         assertNull(result)
     }
 
+    @OptIn(ExperimentalSettingsApi::class)
     @Test
     fun `clear preferences clears cache for multiple values`() = runTest {
         (0..11).forEachIndexed { index, i ->

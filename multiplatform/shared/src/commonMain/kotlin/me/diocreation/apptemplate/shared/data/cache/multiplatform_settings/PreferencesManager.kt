@@ -8,7 +8,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 class PreferencesManager constructor(private val observableSettings: ObservableSettings) {
     fun setInt(key: String, value: Int) = observableSettings.putInt(key = key, value = value)
-
+    @com.russhwolf.settings.ExperimentalSettingsApi
     fun getInt(key: String) = observableSettings.getIntOrNullFlow(key = key)
     fun clearPreferences() = observableSettings.clear()
 

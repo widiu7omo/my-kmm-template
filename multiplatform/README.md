@@ -14,3 +14,8 @@ How navigation works in Android
 How navigation works in iOS 
 
 How DI Works in KMM
+
+
+How to refactor
+
+switch to project source file -> right click folder apptemplate ->  refactor -> rename apptemplate

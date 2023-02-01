@@ -19,3 +19,5 @@ How DI Works in KMM
 How to refactor
 
 switch to project source file -> right click folder apptemplate ->  refactor -> rename apptemplate
+dont forget, if R error in activity, import R from me.diocreation.projectname.android.R
+
